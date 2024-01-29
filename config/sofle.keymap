@@ -47,7 +47,7 @@ bindings = <
 &kp LGUI
 &lt LOWER SPACE
 &kp RET
-&kp BKSPC
+&kp BSPC
 &lt RAISE SPACE
 &kp RGUI
 &none
