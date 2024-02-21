@@ -16,7 +16,6 @@
 #define ADJUST 3
 
 / {
-
    // Activate ADJUST layer by pressing raise and lower
 	conditional_layers {
 		compatible = "zmk,conditional-layers";
@@ -25,6 +24,17 @@
 			then-layer = <ADJUST>;
 		};
 	};
+/ {
+  behaviors {
+      bspc_del: backspace_delete {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&kp BACKSPACE>, <&kp DELETE>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+          keep-mods = <(MOD_RSFT)>;
+      };
+  };
+};
 
 	keymap {
 		compatible = "zmk,keymap";
@@ -32,17 +42,17 @@
 		default_layer {
 			display-name = "default";
 // -----------------------------------------------------------------------------------------
-// |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |       |
-// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
+// |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   | BSPC/DEL |
+// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSLH |
 // |       |  A  |MT(S)|MT(D) |MT(F) |  MT(G) |        |  H   |  J    |  K    |  L   |   ;   |   '   |
 // | SHIFT |  Z  |  X  |  C |  V   |  B   |  MUTE  |  |     	|  N   |  M    |  ,    |  .   |   /   | SHIFT |
 //               | GUI | ALT  | CTRL | LT(LOWER) |  ENTER |  | SPC | LT(RAISE) | CTRL  | ALT   | CIRCLE |
 bindings = <
-&kp GRAVE &kp N1 &kp N2   &kp N3   &kp N4    &kp N5                           &kp N6 &kp N7    &kp N8    &kp N9   &kp N0   &kp DEL
+&gresc &kp N1 &kp N2   &kp N3   &kp N4    &kp N5                           &kp N6 &kp N7    &kp N8    &kp N9   &kp N0   &bspc_del
 &kp TAB   &kp Q  &kp W    &kp E    &kp R     &kp T                            &kp Y  &kp U     &kp I     &kp O    &kp P    &kp BSLH
 &kp TAB   &mt LSHFT A &mt LCTRL S &mt LALT D &mt LGUI F &kp G		   &kp H  &mt RGUI J     &mt RALT K     &mt RCTRL L &mt RSHFT SEMI &kp SQT
 &kp LSHFT &kp Z  &kp X    &kp C &kp V     &kp B      &kp C_MUTE &none  &kp N  &kp M     &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
-&none	&none	&kp LGUI	&lt LOWER RET	&kp SPACE	&kp BSPC	&lt RAISE SPACE	&kp RGUI	&none	&none
+&none	&none	&kp LGUI	&lt LOWER RET	&kp SPACE	&kp RET	&lt RAISE SPACE	&kp RGUI	&none	&none
 			>;
  
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
