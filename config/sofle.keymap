@@ -16,6 +16,10 @@
 #define RAISE 2
 #define ADJUST 3
 
+ &soft_off {
+   hold-time-ms = <2000>; // Only turn off it the key is held for 5 seconds or longer.
+	};
+
 / {
    // Activate ADJUST layer by pressing raise and lower
 	conditional_layers {
@@ -38,9 +42,6 @@
   };
 
 
- &soft_off {
-    hold-time-ms = <2000>; // Only turn off it the key is held for 5 seconds or longer.
-	};
 
 	keymap {
 		compatible = "zmk,keymap";
